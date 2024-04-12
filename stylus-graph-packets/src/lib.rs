@@ -6,49 +6,73 @@ extern crate alloc;
 #[global_allocator]
 static ALLOC: mini_alloc::MiniAlloc = mini_alloc::MiniAlloc::INIT;
 
+use alloy_primitives::Address;
 /// Import items from the SDK. The prelude contains common traits and macros.
-use stylus_sdk::{alloy_primitives::U256, prelude::*};
+use stylus_sdk::prelude::*;
 
 sol_storage! {
   #[entrypoint]
   pub struct Recommendation {
-      uint256 number;
+      int64[][] user_activity_matrix;
+      mapping(address => int64) address_to_id;
   }
+}
+
+pub enum ActivityType {
+    Transaction,
+    Social,
+    Gaming,
+    Identity,
+    Ecommerce,
 }
 
 /// Declare that `Counter` is a contract with the following external methods.
 #[external]
 impl Recommendation {
-    /// Gets the number from storage.
-    pub fn number(&self) -> U256 {
-        self.number.get()
-    }
-
-    /// Sets a number in storage to a user-specified value.
-    pub fn set_number(&mut self, new_number: U256) {
-        self.number.set(new_number);
-    }
-
     /// Increments `number` and updates its value in storage.
-    pub fn increment(&mut self) {
-        let number = self.number.get();
-        self.set_number(number + U256::from(1));
+    pub fn add_user(&mut self, user_address: Address, initial_vector: Vec<i64>) {
+        let mut matrix = self.user_activity_matrix.grow();
+        for i in initial_vector.iter() {
+            matrix.push((*i).try_into().unwrap())
+        }
+        let mut id = self.address_to_id.setter(user_address);
+        id.set(self.user_activity_matrix.len().try_into().unwrap())
     }
 
-    #[view]
-    pub fn get_recommendations(&self) -> Vec<Vec<i64>> {
-        let user_activity_matrix = vec![
-            vec![1, 0, 1, 0, 1],
-            vec![0, 1, 1, 0, 0],
-            vec![1, 1, 0, 1, 0],
-            vec![0, 1, 0, 0, 1],
-        ];
+    pub fn add_analytics(&mut self, user_address: Address, action_index: i64, points: i64) {
+        let user_index = self.address_to_id.get(user_address);
+        let current_user_analytics = self.user_activity_matrix.getter(user_index).unwrap();
+        let current_points = current_user_analytics.getter(action_index).unwrap().get();
+        let mut guard = self.user_activity_matrix.setter(user_index).unwrap();
+        let mut user_analytics = guard.setter(action_index).unwrap();
+        user_analytics.set(
+            current_points
+                .checked_add(points.try_into().unwrap())
+                .unwrap(),
+        );
+    }
 
+    /*
+    Example user activity matrix
+    let user_activity_matrix = vec![
+        vec![1, 0, 1, 0, 1],
+        vec![0, 1, 1, 0, 0],
+        vec![1, 1, 0, 1, 0],
+        vec![0, 1, 0, 0, 1],
+    ];
+    */
+    #[view]
+    pub fn get_recommendations(
+        &self,
+        user_activity_matrix: Vec<Vec<i64>>,
+        user_index: i64,
+        k: i64,
+    ) -> Vec<Vec<i64>> {
         let similarity_matrix = compute_similarity_matrix(&user_activity_matrix);
 
-        // // Recommend followers for user 0 based on similar users and their activities
+        // Recommend followers for user based on similar users and their activities
         let recommended_followers =
-            recommend_followers(0, &user_activity_matrix, &similarity_matrix, 2);
+            recommend_followers(user_index, &user_activity_matrix, &similarity_matrix, k);
         return recommended_followers;
     }
 }
