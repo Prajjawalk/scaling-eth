@@ -126,10 +126,10 @@ fn recommend_followers(
     for (similar_user_index, _) in similar_users.iter().take(k as usize) {
         let mut idx: i64 = 0;
         for &activity_value in user_activity_matrix[*similar_user_index as usize].iter() {
-            idx = idx + 1;
             if activity_value > 0 {
                 recommended_followers[idx as usize].push(*similar_user_index);
             }
+            idx = idx + 1;
         }
     }
 
