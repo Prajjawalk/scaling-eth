@@ -13,6 +13,17 @@ contract UserAnalytics {
     uint256 category
   );
 
+  function addUser(address userAddress, int64[] calldata initialMatrix) public {
+    // get the total length of current activity matrix
+    uint256 latestIndex = userActivityMatrix.length;
+
+    // append the new user details
+    userActivityMatrix.push(initialMatrix);
+
+    // add user id to address mapping
+    addressToId[userAddress] = latestIndex;
+  }
+
   function addAnalytics(address payable userAddress, uint256 category, int64 score) public payable {
     userActivityMatrix[addressToId[userAddress]][category] += score;
 
@@ -23,10 +34,6 @@ contract UserAnalytics {
     consumerCredits[msg.sender] += 1;
 
     emit NewAnalytics(userAddress, msg.sender, category);
-  }
-
-  function fetchRecommendations() public view {
-    require(consumerCredits[msg.sender] > 10);
   }
 
   receive() external payable {}
