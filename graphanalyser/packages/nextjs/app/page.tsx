@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { sources } from "next/dist/compiled/webpack/webpack";
 import Link from "next/link";
 import { EvmChains, IndexService, SignProtocolClient, SpMode } from "@ethsign/sp-sdk";
 import type { NextPage } from "next";
@@ -12,10 +13,17 @@ import { Address } from "~~/components/scaffold-eth";
 import { useScaffoldContract } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
+  const { address: connectedAddress } = useAccount();
   const [attestationId, setAttestationId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
+  const [nodes, setNodes] = useState([{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }]);
+  const [links, setLinks] = useState([
+    {
+      source: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}`,
+      target: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}`,
+    },
+  ]);
 
-  const { address: connectedAddress } = useAccount();
   const { data: walletClient } = useWalletClient();
   const { data: UserAnalytics } = useScaffoldContract({
     contractName: "UserAnalytics",
@@ -70,16 +78,34 @@ const Home: NextPage = () => {
     }
   };
 
+  const handleGetRecommendations = async () => {
+    try {
+      const result = await fetch("/api", {
+        method: "GET",
+      });
+      const recommendations = await result.json();
+      const recommended_followers = recommendations.data[0];
+      let follower_nodes = [];
+      let follower_links = [];
+      recommended_followers.map((i: string) => {
+        follower_nodes.push({ id: `${i?.slice(0, 5)}...${i?.slice(38, 42)}` });
+      });
+      recommended_followers.map((i: string) => {
+        follower_links.push({
+          source: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}`,
+          target: `${i?.slice(0, 5)}...${i?.slice(38, 42)}`,
+        });
+      });
+      setNodes(follower_nodes);
+      setLinks(follower_links);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const graphData = {
-    nodes: [
-      { id: "node1", group: 1 },
-      { id: "node2", group: 2 },
-      { id: "node3", group: 1 },
-    ],
-    links: [
-      { source: "node1", target: "node2", value: 10 },
-      { source: "node1", target: "node3", value: 5 },
-    ],
+    nodes: nodes,
+    links: links,
   };
 
   const showLineNumbers = true;
@@ -132,7 +158,7 @@ const address = "0x523..."
                 <div className="bg-base-100 border-base-300 border shadow-md shadow-secondary rounded-3xl px-6 lg:px-8 mb-6 space-y-1 py-4">
                   <div className="flex">
                     <div className="flex flex-col gap-1">
-                      <span className="font-bold">Get recommended followers</span>
+                      <span className="font-bold">Recommended Followers Graph</span>
 
                       <div className="flex gap-1 items-center">
                         <Sociogram data={graphData} />
@@ -172,6 +198,28 @@ const address = "0x523..."
                         >
                           {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
                           Send Analytics
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-1 grid grid-cols-1 gap-10">
+              <div className="col-span-1 flex flex-col">
+                <div className="bg-base-100 border-base-300 border shadow-md shadow-secondary rounded-3xl px-6 lg:px-8 mb-6 space-y-1 py-4">
+                  <div className="flex gap-x-10">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-bold">Get Recommended Followers!</span>
+
+                      <div className="flex gap-1 items-center">
+                        <button
+                          className="btn btn-secondary btn-md"
+                          // disabled={String(attestationId) != "" || isLoading}
+                          onClick={handleGetRecommendations}
+                        >
+                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          Get Recommendations
                         </button>
                       </div>
                     </div>
