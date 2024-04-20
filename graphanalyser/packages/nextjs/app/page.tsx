@@ -78,13 +78,13 @@ const Home: NextPage = () => {
     }
   };
 
-  const handleGetRecommendations = async () => {
+  const handleGetRecommendations = async (type: number) => {
     try {
       const result = await fetch("/api", {
         method: "GET",
       });
       const recommendations = await result.json();
-      const recommended_followers = recommendations.data[0];
+      const recommended_followers = recommendations.data[type];
       let follower_nodes = [];
       let follower_links = [];
       recommended_followers.map((i: string) => {
@@ -113,27 +113,34 @@ const Home: NextPage = () => {
   const codeBlock = true;
 
   const code = `
-import { SendAnalytics } from 'recommender';
+import { Analyse } from 'OpenAnalyse';
+import { 
+  privateKeyToAccount 
+} from 'viem/accounts';
 
-const SendAnalytics = () => (
+const analyse = new Analyse({
+  // add system private key 
+  // to broadcast analytics
+  account: privateKeyToAccount('privateKey'),
+  provider: 'provider-id'
+})
 
-const point = 1
-const providerId = 123
-const address = "0x523..."
+// user analytics score
+const point = 1;
+const address = 'user-address';
 
-<SendAnalytics
-  from={providerId}
-  point={point}
-  address={address}
-/>
-)`;
+analyse.sendAnalytics({
+  user: address,
+  score: point
+})
+`;
 
   return (
     <>
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome</span>
+            <span className="block text-2xl mb-2">Open Analyse Demo</span>
             {/* <span className="block text-4xl font-bold">Scaffold-ETH 2</span> */}
           </h1>
           <div className={`grid grid-cols-2 px-6 lg:px-10 lg:gap-12 w-full max-w-7xl my-0`}>
@@ -216,10 +223,45 @@ const address = "0x523..."
                         <button
                           className="btn btn-secondary btn-md"
                           // disabled={String(attestationId) != "" || isLoading}
-                          onClick={handleGetRecommendations}
+                          onClick={() => handleGetRecommendations(0)}
                         >
                           {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
-                          Get Recommendations
+                          Gaming
+                        </button>
+                        <button
+                          className="btn btn-secondary btn-md"
+                          // disabled={String(attestationId) != "" || isLoading}
+                          onClick={() => handleGetRecommendations(1)}
+                        >
+                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          Web3 Social
+                        </button>
+                        <button
+                          className="btn btn-secondary btn-md"
+                          // disabled={String(attestationId) != "" || isLoading}
+                          onClick={() => handleGetRecommendations(2)}
+                        >
+                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          NFT Marketplace
+                        </button>
+                      </div>
+                      <div className="flex gap-1 items-center">
+                        <button
+                          className="btn btn-secondary btn-md"
+                          // disabled={String(attestationId) != "" || isLoading}
+                          onClick={() => handleGetRecommendations(3)}
+                        >
+                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          Dex Traders
+                        </button>
+
+                        <button
+                          className="btn btn-secondary btn-md"
+                          // disabled={String(attestationId) != "" || isLoading}
+                          onClick={() => handleGetRecommendations(4)}
+                        >
+                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          Similar Identity and certificates
                         </button>
                       </div>
                     </div>

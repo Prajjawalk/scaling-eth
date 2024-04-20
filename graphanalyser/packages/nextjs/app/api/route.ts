@@ -148,7 +148,7 @@ export async function GET() {
           type: "function",
         },
       ],
-      address: "0xa69E3ccFd133A80B92CD93De555243416c19E566",
+      address: "0xC8E1aAAD08d00CbF456c880fcBAcc004cC99fbC1",
       publicClient: stylusPublicClient,
     });
 
@@ -158,6 +158,11 @@ export async function GET() {
       "2": "0x5Be2DdD4f0d6ABC1915344351B8231998BB401C2",
       "3": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
       "4": "0x55Ae5e87C8be13EcA8db6dcD54EbCCd491A857F8",
+      "5": "0x388C818CA8B9251b393131C08a736A67ccB19297",
+      "6": "0x2C961d991bf94A7Eac84C453FaAE8614cb6b7F9B",
+      "7": "0x7239bA00E03Fb9A8b8E4Eb5065aE2c35d759ba45",
+      "8": "0x5f65f7b609678448494De4C87521CdF6cEf1e932",
+      "9": "0xcCca379821A19F6E5224F511f1806D91a81Db6D3",
     };
     const response = await Recommender.read.getRecommendations([
       [
@@ -166,9 +171,14 @@ export async function GET() {
         [0n, 0n, 1n, 1n, 1n],
         [1n, 1n, 0n, 0n, 1n],
         [1n, 1n, 0n, 1n, 0n],
+        [1n, 0n, 0n, 1n, 1n],
+        [1n, 1n, 0n, 0n, 1n],
+        [0n, 0n, 1n, 1n, 1n],
+        [1n, 1n, 1n, 1n, 1n],
+        [0n, 0n, 0n, 1n, 1n],
       ],
       1n,
-      4n,
+      7n,
     ]);
 
     const result = response.map(i =>

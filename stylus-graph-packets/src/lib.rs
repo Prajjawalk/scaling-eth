@@ -88,7 +88,7 @@ fn cosine_similarity(user1: &Vec<i64>, user2: &Vec<i64>) -> i64 {
 // Function to compute user-user similarity matrix
 fn compute_similarity_matrix(user_activity_matrix: &Vec<Vec<i64>>) -> Vec<Vec<i64>> {
     let num_users = user_activity_matrix.len();
-    let mut similarity_matrix = vec![vec![0; 5]; num_users];
+    let mut similarity_matrix = vec![vec![0; num_users]; num_users];
 
     for i in 0..num_users {
         for j in 0..num_users {
