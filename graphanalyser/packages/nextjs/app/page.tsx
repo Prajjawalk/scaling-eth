@@ -27,6 +27,7 @@ const Home: NextPage = () => {
       const res = await indexService.queryAttestationList({
         schemaId: String(process.env.NEXT_PUBLIC_SCHEMA_ID),
         attester: connectedAddress,
+        // @ts-ignore
         mode: "onchain",
         page: 1,
       });
