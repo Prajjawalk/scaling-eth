@@ -199,7 +199,7 @@ analyse.sendAnalytics({
                       </div>
                       {attestationId ? <div>Attestation Id: {attestationId}</div> : null}
                     </div>
-                    <div className="flex flex-col gap-1">
+                    {/* <div className="flex flex-col gap-1">
                       <span className="font-bold">Share your analytics!</span>
 
                       <div className="flex gap-1 items-center">
@@ -209,7 +209,7 @@ analyse.sendAnalytics({
                         </button>
                       </div>
                       {analyticsTx ? <div>Tx: {analyticsTx}</div> : null}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

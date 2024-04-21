@@ -303,7 +303,7 @@ const deployedContracts = {
   },
   4357475745646590: {
     UserAnalytics: {
-      address: "0x1BC45Ae62a7dD22319eCA5c491C2362058bc58Bd",
+      address: "0x239FB2F176E081b103d9d44Baf52c817e073F254",
       abi: [
         {
           inputs: [],
@@ -364,11 +364,6 @@ const deployedContracts = {
               internalType: "address",
               name: "userAddress",
               type: "address",
-            },
-            {
-              internalType: "int64[]",
-              name: "initialMatrix",
-              type: "int64[]",
             },
           ],
           name: "addUser",
@@ -454,6 +449,32 @@ const deployedContracts = {
               internalType: "address",
               name: "",
               type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "latestIndex",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalCategories",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
             },
           ],
           stateMutability: "view",
