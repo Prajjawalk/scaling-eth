@@ -26,7 +26,6 @@ pub enum ActivityType {
     Ecommerce,
 }
 
-/// Declare that `Counter` is a contract with the following external methods.
 #[external]
 impl Recommendation {
     /// Increments `number` and updates its value in storage.

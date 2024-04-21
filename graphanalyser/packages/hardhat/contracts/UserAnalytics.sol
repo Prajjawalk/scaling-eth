@@ -7,13 +7,13 @@ contract UserAnalytics {
   mapping(uint256 => address) public idToAddress;
   mapping(address => uint256) public consumerCredits;
   string public currentStylusRPC;
-  uint256 latestIndex;
-  uint256 totalCategories;
+  uint256 public latestIndex;
+  uint256 public totalCategories;
 
   constructor() {
     int64[] memory initialMatrix;
     userActivityMatrix.push(initialMatrix);
-    latestIndex = 1;
+    latestIndex = 0;
     totalCategories = 5;
   }
 
@@ -23,36 +23,28 @@ contract UserAnalytics {
     uint256 category
   );
 
-  function addUser(address userAddress) public {
+  function addUser(address userAddress) external {
     // get the total length of current activity matrix
-    latestIndex += 1;
+    latestIndex = latestIndex + 1;
+    int64[] memory initialMatrix;
+    userActivityMatrix.push(initialMatrix);
 
-      // add the new user details
-      for(uint256 i = 0; i < totalCategories; i++ ) {
-        userActivityMatrix[latestIndex][i] = 0;
-      }
-      
+    // add the new user details
+    for(uint256 i = 0; i < totalCategories; i++ ) {
+        userActivityMatrix[latestIndex].push(0);
+    }
+    
 
-      // add user id to address mapping
-      addressToId[userAddress] = latestIndex;
-      idToAddress[latestIndex] = userAddress;
+    // add user id to address mapping
+    addressToId[userAddress] = latestIndex;
+    idToAddress[latestIndex] = userAddress;
   }
 
   function addAnalytics(address payable userAddress, uint256 category, int64 score) public payable {
     // add user if not already present
     if (addressToId[userAddress] == 0) {
      
-      latestIndex += 1;
-
-      // add the new user details
-      for(uint256 i = 0; i < totalCategories; i++ ) {
-        userActivityMatrix[latestIndex][i] = 0;
-      }
-      
-
-      // add user id to address mapping
-      addressToId[userAddress] = latestIndex;
-      idToAddress[latestIndex] = userAddress;
+      this.addUser(userAddress);
     }
 
     userActivityMatrix[addressToId[userAddress]][category] += score;
