@@ -1,0 +1,16 @@
+{
+  "name": "openanalyse",
+  "version": "0.1.0",
+  "description": "A node.js SDK to interact with OpenAnalyse protocol.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prajjawal Khandelwal",
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.9.23",
+    "wagmi": "^2.5.20"
+  }
+}

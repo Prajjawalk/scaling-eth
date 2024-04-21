@@ -1,0 +1,327 @@
+{
+  "address": "0x1BC45Ae62a7dD22319eCA5c491C2362058bc58Bd",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "provider",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "category",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewAnalytics",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "category",
+          "type": "uint256"
+        },
+        {
+          "internalType": "int64",
+          "name": "score",
+          "type": "int64"
+        }
+      ],
+      "name": "addAnalytics",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "int64[]",
+          "name": "initialMatrix",
+          "type": "int64[]"
+        }
+      ],
+      "name": "addUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "addressToId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "consumerCredits",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentStylusRPC",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getUserActivityMatrix",
+      "outputs": [
+        {
+          "internalType": "int64[][]",
+          "name": "",
+          "type": "int64[][]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "idToAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "userActivityMatrix",
+      "outputs": [
+        {
+          "internalType": "int64",
+          "name": "",
+          "type": "int64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "transactionHash": "0xacc1f7bbaaff9df9c6747e9db099bdad78dd2052406c584d03f540b34094f4d0",
+  "receipt": {
+    "to": null,
+    "from": "0xa2fDa786F910d2863D6d6F485d8a0816fbD0bAb0",
+    "contractAddress": "0x1BC45Ae62a7dD22319eCA5c491C2362058bc58Bd",
+    "transactionIndex": 0,
+    "gasUsed": "26648205",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x9583360635b1d0b018efd9e3ff6fe107f9cf8aaca23e665c5128b0a87f4df372",
+    "transactionHash": "0xacc1f7bbaaff9df9c6747e9db099bdad78dd2052406c584d03f540b34094f4d0",
+    "logs": [],
+    "blockNumber": 26103,
+    "cumulativeGasUsed": "26648205",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 13,
+  "solcInputHash": "8d8777db08fda3b2d99e5b2938e2d16c",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"provider\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"}],\"name\":\"NewAnalytics\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"category\",\"type\":\"uint256\"},{\"internalType\":\"int64\",\"name\":\"score\",\"type\":\"int64\"}],\"name\":\"addAnalytics\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"userAddress\",\"type\":\"address\"},{\"internalType\":\"int64[]\",\"name\":\"initialMatrix\",\"type\":\"int64[]\"}],\"name\":\"addUser\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addressToId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"consumerCredits\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentStylusRPC\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getUserActivityMatrix\",\"outputs\":[{\"internalType\":\"int64[][]\",\"name\":\"\",\"type\":\"int64[][]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"idToAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"userActivityMatrix\",\"outputs\":[{\"internalType\":\"int64\",\"name\":\"\",\"type\":\"int64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/UserAnalytics.sol\":\"UserAnalytics\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/UserAnalytics.sol\":{\"content\":\"//SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0 <0.9.0;\\n\\ncontract UserAnalytics {\\n  int64[][] public userActivityMatrix;\\n  mapping(address => uint256) public addressToId;\\n  mapping(uint256 => address) public idToAddress;\\n  mapping(address => uint256) public consumerCredits;\\n  string public currentStylusRPC;\\n  uint256 latestIndex;\\n  uint256 totalCategories;\\n\\n  constructor() {\\n    int64[] memory initialMatrix;\\n    userActivityMatrix.push(initialMatrix);\\n    latestIndex = 1;\\n    totalCategories = 5;\\n  }\\n\\n  event NewAnalytics(\\n    address user,\\n    address provider,\\n    uint256 category\\n  );\\n\\n  function addUser(address userAddress, int64[] calldata initialMatrix) public {\\n    // get the total length of current activity matrix\\n    uint256 latestIndex = userActivityMatrix.length;\\n\\n    // append the new user details\\n    userActivityMatrix.push(initialMatrix);\\n\\n    // add user id to address mapping\\n    addressToId[userAddress] = latestIndex;\\n    idToAddress[latestIndex] = userAddress;\\n  }\\n\\n  function addAnalytics(address payable userAddress, uint256 category, int64 score) public payable {\\n    // add user if not already present\\n    // if (addressToId[userAddress] == 0) {\\n     \\n    //   latestIndex += 1;\\n\\n    //   // add the new user details\\n    //   for(uint256 i = 0; i < totalCategories; i++ ) {\\n    //     userActivityMatrix[latestIndex][i] = 0;\\n    //   }\\n      \\n\\n    //   // add user id to address mapping\\n    //   addressToId[userAddress] = latestIndex;\\n    //   idToAddress[latestIndex] = userAddress;\\n    // }\\n\\n    // userActivityMatrix[addressToId[userAddress]][category] += score;\\n\\n    // // rewarding the users for sharing data\\n    bool sent = userAddress.send(100);\\n    require(sent, \\\"Failed to reward user\\\");\\n\\n    // // increasing credit limit for provider\\n    consumerCredits[msg.sender] = consumerCredits[msg.sender] + 1;\\n\\n    emit NewAnalytics(userAddress, msg.sender, category);\\n  }\\n\\n  function getUserActivityMatrix() external view returns(int64[][] memory) {\\n    return userActivityMatrix;\\n  }\\n\\n  receive() external payable {}\\n}\",\"keccak256\":\"0x0d4410763433cab8016fcef1b4f989c1559714c3e9f19888a01d0594cb285d14\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060008054600181018255908052606080519091610055917f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56390910190608090610066565b505060016005908155600655610136565b828054828255906000526020600020906003016004900481019282156101115791602002820160005b838211156100dc57835183826101000a8154816001600160401b03021916908360070b6001600160401b03160217905550926020019260080160208160070104928301926001030261008f565b801561010f5782816101000a8154906001600160401b0302191690556008016020816007010492830192600103026100dc565b505b5061011d929150610121565b5090565b5b8082111561011d5760008155600101610122565b61087d806101456000396000f3fe60806040526004361061007e5760003560e01c80638de0b4b21161004e5780638de0b4b21461014b578063a9d2e2d71461016b578063b0f46b3b146101a6578063cb0e0d7d146101c857600080fd5b8062acd0171461008a57806306be2b411461009f5780632a2d0c47146100ca5780632a45e1ed1461011857600080fd5b3661008557005b600080fd5b61009d6100983660046105db565b6101f5565b005b3480156100ab57600080fd5b506100b46102e2565b6040516100c19190610624565b60405180910390f35b3480156100d657600080fd5b506101006100e53660046106b1565b6002602052600090815260409020546001600160a01b031681565b6040516001600160a01b0390911681526020016100c1565b34801561012457600080fd5b506101386101333660046106ca565b61039e565b60405160079190910b81526020016100c1565b34801561015757600080fd5b5061009d6101663660046106ec565b6103f0565b34801561017757600080fd5b50610198610186366004610774565b60036020526000908152604090205481565b6040519081526020016100c1565b3480156101b257600080fd5b506101bb61046b565b6040516100c19190610798565b3480156101d457600080fd5b506101986101e3366004610774565b60016020526000908152604090205481565b6040516000906001600160a01b03851690829060649082818181858883f193505050509050806102635760405162461bcd60e51b81526020600482015260156024820152742330b4b632b2103a37903932bbb0b932103ab9b2b960591b604482015260640160405180910390fd5b3360009081526003602052604090205461027e9060016107e6565b336000818152600360209081526040918290209390935580516001600160a01b03881681529283019190915281018490527f3a5918ca939d93e6bd42ac6f2f818c05e35a0fec0af9c4e1fd1f2b32db4e2f0d9060600160405180910390a150505050565b60606000805480602002602001604051908101604052809291908181526020016000905b828210156103955760008481526020908190208301805460408051828502810185019091528181529283018282801561038157602002820191906000526020600020906000905b825461010083900a900460070b81526020600f830181900493840193600103600890930192909202910180841161034d5790505b505050505081526020019060010190610306565b50505050905090565b600082815481106103ae57600080fd5b9060005260206000200181815481106103c657600080fd5b9060005260206000209060049182820401919006600802915091509054906101000a900460070b81565b6000805460018101825590805261042a7f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563820184846104f9565b506001600160a01b039093166000818152600160209081526040808320879055958252600290529390932080546001600160a01b0319169093179092555050565b600480546104789061080d565b80601f01602080910402602001604051908101604052809291908181526020018280546104a49061080d565b80156104f15780601f106104c6576101008083540402835291602001916104f1565b820191906000526020600020905b8154815290600101906020018083116104d457829003601f168201915b505050505081565b8280548282559060005260206000209060030160049004810192821561059e5791602002820160005b8382111561056857825467ffffffffffffffff8535811661010084900a908102910219909116178355602093840193600f82010492830192600103600890910102610522565b801561059c5782816101000a81549067ffffffffffffffff0219169055600801602081600701049283019260010302610568565b505b506105aa9291506105ae565b5090565b5b808211156105aa57600081556001016105af565b6001600160a01b03811681146105d857600080fd5b50565b6000806000606084860312156105f057600080fd5b83356105fb816105c3565b9250602084013591506040840135600781900b811461061957600080fd5b809150509250925092565b6000602080830181845280855180835260408601915060408160051b87010192508387016000805b838110156106a357888603603f19018552825180518088529088019088880190845b8181101561068d57835160070b8352928a0192918a019160010161066e565b509097505050938601939186019160010161064c565b509398975050505050505050565b6000602082840312156106c357600080fd5b5035919050565b600080604083850312156106dd57600080fd5b50508035926020909101359150565b60008060006040848603121561070157600080fd5b833561070c816105c3565b9250602084013567ffffffffffffffff8082111561072957600080fd5b818601915086601f83011261073d57600080fd5b81358181111561074c57600080fd5b8760208260051b850101111561076157600080fd5b6020830194508093505050509250925092565b60006020828403121561078657600080fd5b8135610791816105c3565b9392505050565b600060208083528351808285015260005b818110156107c5578581018301518582016040015282016107a9565b506000604082860101526040601f19601f8301168501019250505092915050565b8082018082111561080757634e487b7160e01b600052601160045260246000fd5b92915050565b600181811c9082168061082157607f821691505b60208210810361084157634e487b7160e01b600052602260045260246000fd5b5091905056fea264697066735822122059a73cb3ffb40b8cd7cc6242fd2c92126636fa422e882d1aa1c0fde649b8c91664736f6c63430008110033",
+  "deployedBytecode": "0x60806040526004361061007e5760003560e01c80638de0b4b21161004e5780638de0b4b21461014b578063a9d2e2d71461016b578063b0f46b3b146101a6578063cb0e0d7d146101c857600080fd5b8062acd0171461008a57806306be2b411461009f5780632a2d0c47146100ca5780632a45e1ed1461011857600080fd5b3661008557005b600080fd5b61009d6100983660046105db565b6101f5565b005b3480156100ab57600080fd5b506100b46102e2565b6040516100c19190610624565b60405180910390f35b3480156100d657600080fd5b506101006100e53660046106b1565b6002602052600090815260409020546001600160a01b031681565b6040516001600160a01b0390911681526020016100c1565b34801561012457600080fd5b506101386101333660046106ca565b61039e565b60405160079190910b81526020016100c1565b34801561015757600080fd5b5061009d6101663660046106ec565b6103f0565b34801561017757600080fd5b50610198610186366004610774565b60036020526000908152604090205481565b6040519081526020016100c1565b3480156101b257600080fd5b506101bb61046b565b6040516100c19190610798565b3480156101d457600080fd5b506101986101e3366004610774565b60016020526000908152604090205481565b6040516000906001600160a01b03851690829060649082818181858883f193505050509050806102635760405162461bcd60e51b81526020600482015260156024820152742330b4b632b2103a37903932bbb0b932103ab9b2b960591b604482015260640160405180910390fd5b3360009081526003602052604090205461027e9060016107e6565b336000818152600360209081526040918290209390935580516001600160a01b03881681529283019190915281018490527f3a5918ca939d93e6bd42ac6f2f818c05e35a0fec0af9c4e1fd1f2b32db4e2f0d9060600160405180910390a150505050565b60606000805480602002602001604051908101604052809291908181526020016000905b828210156103955760008481526020908190208301805460408051828502810185019091528181529283018282801561038157602002820191906000526020600020906000905b825461010083900a900460070b81526020600f830181900493840193600103600890930192909202910180841161034d5790505b505050505081526020019060010190610306565b50505050905090565b600082815481106103ae57600080fd5b9060005260206000200181815481106103c657600080fd5b9060005260206000209060049182820401919006600802915091509054906101000a900460070b81565b6000805460018101825590805261042a7f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563820184846104f9565b506001600160a01b039093166000818152600160209081526040808320879055958252600290529390932080546001600160a01b0319169093179092555050565b600480546104789061080d565b80601f01602080910402602001604051908101604052809291908181526020018280546104a49061080d565b80156104f15780601f106104c6576101008083540402835291602001916104f1565b820191906000526020600020905b8154815290600101906020018083116104d457829003601f168201915b505050505081565b8280548282559060005260206000209060030160049004810192821561059e5791602002820160005b8382111561056857825467ffffffffffffffff8535811661010084900a908102910219909116178355602093840193600f82010492830192600103600890910102610522565b801561059c5782816101000a81549067ffffffffffffffff0219169055600801602081600701049283019260010302610568565b505b506105aa9291506105ae565b5090565b5b808211156105aa57600081556001016105af565b6001600160a01b03811681146105d857600080fd5b50565b6000806000606084860312156105f057600080fd5b83356105fb816105c3565b9250602084013591506040840135600781900b811461061957600080fd5b809150509250925092565b6000602080830181845280855180835260408601915060408160051b87010192508387016000805b838110156106a357888603603f19018552825180518088529088019088880190845b8181101561068d57835160070b8352928a0192918a019160010161066e565b509097505050938601939186019160010161064c565b509398975050505050505050565b6000602082840312156106c357600080fd5b5035919050565b600080604083850312156106dd57600080fd5b50508035926020909101359150565b60008060006040848603121561070157600080fd5b833561070c816105c3565b9250602084013567ffffffffffffffff8082111561072957600080fd5b818601915086601f83011261073d57600080fd5b81358181111561074c57600080fd5b8760208260051b850101111561076157600080fd5b6020830194508093505050509250925092565b60006020828403121561078657600080fd5b8135610791816105c3565b9392505050565b600060208083528351808285015260005b818110156107c5578581018301518582016040015282016107a9565b506000604082860101526040601f19601f8301168501019250505092915050565b8082018082111561080757634e487b7160e01b600052601160045260246000fd5b92915050565b600181811c9082168061082157607f821691505b60208210810361084157634e487b7160e01b600052602260045260246000fd5b5091905056fea264697066735822122059a73cb3ffb40b8cd7cc6242fd2c92126636fa422e882d1aa1c0fde649b8c91664736f6c63430008110033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 5,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "userActivityMatrix",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_array(t_array(t_int64)dyn_storage)dyn_storage"
+      },
+      {
+        "astId": 9,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "addressToId",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 13,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "idToAddress",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_uint256,t_address)"
+      },
+      {
+        "astId": 17,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "consumerCredits",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 19,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "currentStylusRPC",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 21,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "latestIndex",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 23,
+        "contract": "contracts/UserAnalytics.sol:UserAnalytics",
+        "label": "totalCategories",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_array(t_int64)dyn_storage)dyn_storage": {
+        "base": "t_array(t_int64)dyn_storage",
+        "encoding": "dynamic_array",
+        "label": "int64[][]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_int64)dyn_storage": {
+        "base": "t_int64",
+        "encoding": "dynamic_array",
+        "label": "int64[]",
+        "numberOfBytes": "32"
+      },
+      "t_int64": {
+        "encoding": "inplace",
+        "label": "int64",
+        "numberOfBytes": "8"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_address)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address)",
+        "numberOfBytes": "32",
+        "value": "t_address"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

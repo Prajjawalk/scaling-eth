@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/UserAnalytics.sol": {
+      "content": "//SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\ncontract UserAnalytics {\n  int64[][] public userActivityMatrix;\n  mapping(address => uint256) public addressToId;\n  mapping(uint256 => address) public idToAddress;\n  mapping(address => uint256) public consumerCredits;\n  string public currentStylusRPC;\n\n  event NewAnalytics(\n    address user,\n    address provider,\n    uint256 category\n  );\n\n  function addUser(address userAddress, int64[] calldata initialMatrix) public {\n    // get the total length of current activity matrix\n    uint256 latestIndex = userActivityMatrix.length;\n\n    // append the new user details\n    userActivityMatrix.push(initialMatrix);\n\n    // add user id to address mapping\n    addressToId[userAddress] = latestIndex;\n    idToAddress[latestIndex] = userAddress;\n  }\n\n  function addAnalytics(address payable userAddress, uint256 category, int64 score) public payable {\n    // add user if not already present\n    if (addressToId[userAddress] == 0) {\n      int64[] memory initialMatrix;\n      uint256 latestIndex = userActivityMatrix.length;\n\n      // append the new user details\n      userActivityMatrix.push(initialMatrix);\n\n      // add user id to address mapping\n      addressToId[userAddress] = latestIndex;\n      idToAddress[latestIndex] = userAddress;\n    }\n\n    userActivityMatrix[addressToId[userAddress]][category] = score;\n\n    // rewarding the users for sharing data\n    // bool sent = userAddress.send(100);\n    // require(sent, \"Failed to reward user\");\n\n    // increasing credit limit for provider\n    consumerCredits[msg.sender] = consumerCredits[msg.sender] + 1;\n\n    emit NewAnalytics(userAddress, msg.sender, category);\n  }\n\n  function getUserActivityMatrix() external view returns(int64[][] memory) {\n    return userActivityMatrix;\n  }\n\n  receive() external payable {}\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

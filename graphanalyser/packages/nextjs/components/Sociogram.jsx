@@ -42,8 +42,8 @@ const Sociogram = ({ data }) => {
           }) // This provide  the id of a node
           .links(data.links), // and this the list of links
       )
-      .force("charge", d3.forceManyBody().strength(-400)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
-      .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
+      .force("charge", d3.forceManyBody().strength(-1600)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
+      .force("center", d3.forceCenter(width/2, height/2)) // This force attracts nodes to the center of the svg area
       .on("end", ticked);
 
     function ticked() {

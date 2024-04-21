@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const walletClient = createWalletClient({
       account,
       chain: {
-        id: Number(process.env.IPC_SUBNET_ID),
+        id: Number(process.env.IPC_SUBNET_CHAIN_ID),
         name: "IPC_Subnet",
         nativeCurrency: {
           name: "Analyse",
@@ -32,19 +32,20 @@ export async function POST(req: Request) {
       },
       transport: http(String(process.env.IPC_SUBNET_URL)),
     });
-
     const UserAnalytics = getContract({
-      abi: deployedContracts[[process.env.IPC_SUBNET_ID] as unknown as keyof typeof deployedContracts].UserAnalytics
-        .abi,
+      abi: deployedContracts[[process.env.IPC_SUBNET_CHAIN_ID] as unknown as keyof typeof deployedContracts]
+        .UserAnalytics.abi,
       address:
-        deployedContracts[[process.env.IPC_SUBNET_ID] as unknown as keyof typeof deployedContracts].UserAnalytics
+        deployedContracts[[process.env.IPC_SUBNET_CHAIN_ID] as unknown as keyof typeof deployedContracts].UserAnalytics
           .address,
       walletClient,
     });
 
     const response = await UserAnalytics?.write.addAnalytics([String(reqData.connectedAddress), 1n, 1n]);
+    console.log(response);
     return new Response(JSON.stringify({ data: response }));
   } catch (e) {
+    console.log(e);
     return new Response("Server Error", { status: 500 });
   }
 }

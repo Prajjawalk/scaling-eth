@@ -16,6 +16,7 @@ const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const [attestationId, setAttestationId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
+  const [aloading, setALoading] = useState(false);
   const [nodes, setNodes] = useState([{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }]);
   const [links, setLinks] = useState([
     {
@@ -23,12 +24,7 @@ const Home: NextPage = () => {
       target: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}`,
     },
   ]);
-
-  const { data: walletClient } = useWalletClient();
-  const { data: UserAnalytics } = useScaffoldContract({
-    contractName: "UserAnalytics",
-    walletClient,
-  });
+  const [analyticsTx, setAnalyticsTx] = useState<string>();
 
   useEffect(() => {
     const indexService = new IndexService("testnet");
@@ -40,7 +36,7 @@ const Home: NextPage = () => {
         page: 1,
       });
 
-      if (res.rows.length > 0) {
+      if (res.rows.length > 0 && res.rows[0].attester == connectedAddress) {
         setAttestationId(res.rows[0].attestationId);
       }
     };
@@ -70,10 +66,19 @@ const Home: NextPage = () => {
   };
 
   const handleShareAnalytics = async () => {
+    setALoading(true);
     try {
-      const tx = await UserAnalytics?.write.addAnalytics([String(connectedAddress), 1, 1]);
-      console.log(tx);
+      const result = await fetch("/api", {
+        method: "POST",
+        body: JSON.stringify({
+          connectedAddress: connectedAddress,
+        }),
+      });
+      const tx = await result.json();
+      setALoading(false);
+      setAnalyticsTx(tx.data);
     } catch (e) {
+      setALoading(false);
       console.log(e);
     }
   };
@@ -85,7 +90,7 @@ const Home: NextPage = () => {
       });
       const recommendations = await result.json();
       const recommended_followers = recommendations.data[type];
-      let follower_nodes = [];
+      let follower_nodes = [{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }];
       let follower_links = [];
       recommended_followers.map((i: string) => {
         follower_nodes.push({ id: `${i?.slice(0, 5)}...${i?.slice(38, 42)}` });
@@ -113,24 +118,24 @@ const Home: NextPage = () => {
   const codeBlock = true;
 
   const code = `
-import { Analyse } from 'OpenAnalyse';
+import { Analyse } from 'openanalyse';
 import { 
   privateKeyToAccount 
 } from 'viem/accounts';
 
 const analyse = new Analyse({
-  // add system private key 
-  // to broadcast analytics
   account: privateKeyToAccount('privateKey'),
-  provider: 'provider-id'
 })
 
 // user analytics score
 const point = 1;
 const address = 'user-address';
+// one out of [0,1,2,3,4]
+const category = 2
 
 analyse.sendAnalytics({
   user: address,
+  category: category,
   score: point
 })
 `;
@@ -185,10 +190,10 @@ analyse.sendAnalytics({
                       <div className="flex gap-1 items-center">
                         <button
                           className="btn btn-secondary btn-md"
-                          disabled={String(attestationId) != "" || isLoading}
+                          disabled={isLoading}
                           onClick={handleCreateAttestation}
                         >
-                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                          {isLoading && <span className="loading loading-spinner loading-xs"></span>}
                           Attest Analytics
                         </button>
                       </div>
@@ -198,15 +203,12 @@ analyse.sendAnalytics({
                       <span className="font-bold">Share your analytics!</span>
 
                       <div className="flex gap-1 items-center">
-                        <button
-                          className="btn btn-secondary btn-md"
-                          // disabled={writeDisabled || isLoading}
-                          onClick={handleShareAnalytics}
-                        >
-                          {/* {isLoading && <span className="loading loading-spinner loading-xs"></span>} */}
+                        <button className="btn btn-secondary btn-md" disabled={aloading} onClick={handleShareAnalytics}>
+                          {aloading && <span className="loading loading-spinner loading-xs"></span>}
                           Send Analytics
                         </button>
                       </div>
+                      {analyticsTx ? <div>Tx: {analyticsTx}</div> : null}
                     </div>
                   </div>
                 </div>
