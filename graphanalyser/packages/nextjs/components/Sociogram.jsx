@@ -8,7 +8,7 @@ const Sociogram = ({ data }) => {
     if (!data) return;
 
     var margin = { top: 10, right: 30, bottom: 30, left: 40 },
-      width = 400 - margin.left - margin.right,
+      width = 450 - margin.left - margin.right,
       height = 605 - margin.top - margin.bottom;
 
     const svg = d3.select(graphRef.current).append("svg").attr("width", width).attr("height", height);
@@ -43,8 +43,11 @@ const Sociogram = ({ data }) => {
           .links(data.links), // and this the list of links
       )
       .force("charge", d3.forceManyBody().strength(-1600)) // This adds repulsion between nodes. Play with the -400 for the repulsion strength
-      .force("center", d3.forceCenter(width/2, height/2)) // This force attracts nodes to the center of the svg area
+      .force("center", d3.forceCenter(width / 2, height / 2)) // This force attracts nodes to the center of the svg area
       .on("end", ticked);
+
+    // Create a progress bar
+    var progress = svg.append("rect").attr("class", "progress").attr("width", 0).attr("height", 10);
 
     function ticked() {
       link
@@ -69,6 +72,14 @@ const Sociogram = ({ data }) => {
           return d.y;
         });
       label.attr("x", d => d.x).attr("y", d => d.y);
+
+      progress.attr("width", simulation.alpha() * width);
+
+      // Stop the simulation when it's finished
+      if (simulation.alpha() < 0.001) {
+        simulation.stop();
+        progress.remove();
+      }
     }
     simulation.force("link").links(data.links);
 

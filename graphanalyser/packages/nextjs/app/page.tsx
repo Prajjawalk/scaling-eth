@@ -5,12 +5,14 @@ import { EvmChains, IndexService, SignProtocolClient, SpMode } from "@ethsign/sp
 import type { NextPage } from "next";
 import { CodeBlock, atomOneDark } from "react-code-blocks";
 import { useAccount } from "wagmi";
+import { RecommendationData } from "~~/components/Recommendations";
 import Sociogram from "~~/components/Sociogram";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const [attestationId, setAttestationId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
+  const [recommendations, setRecommendations] = useState<string[]>([String(connectedAddress)]);
   // const [aloading, setALoading] = useState(false);
   const [nodes, setNodes] = useState([{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }]);
   const [links, setLinks] = useState([
@@ -68,6 +70,7 @@ const Home: NextPage = () => {
       });
       const recommendations = await result.json();
       const recommended_followers = recommendations.data[type];
+      setRecommendations(recommended_followers);
       const follower_nodes = [{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }];
       const follower_links: SetStateAction<{ source: string; target: string }[]> = [];
       recommended_followers.map((i: string) => {
@@ -153,6 +156,11 @@ analyse.sendAnalytics({
                       <div className="flex gap-1 items-center">
                         <Sociogram data={graphData} />
                       </div>
+                      {recommendations?.length > 1 ? (
+                        <div>
+                          <RecommendationData addresses={recommendations} />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
