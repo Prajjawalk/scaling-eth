@@ -1,22 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { sources } from "next/dist/compiled/webpack/webpack";
-import Link from "next/link";
+import { SetStateAction, useEffect, useState } from "react";
 import { EvmChains, IndexService, SignProtocolClient, SpMode } from "@ethsign/sp-sdk";
 import type { NextPage } from "next";
 import { CodeBlock, atomOneDark } from "react-code-blocks";
-import { useAccount, useWalletClient } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useAccount } from "wagmi";
 import Sociogram from "~~/components/Sociogram";
-import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldContract } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const [attestationId, setAttestationId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
-  const [aloading, setALoading] = useState(false);
+  // const [aloading, setALoading] = useState(false);
   const [nodes, setNodes] = useState([{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }]);
   const [links, setLinks] = useState([
     {
@@ -24,7 +19,7 @@ const Home: NextPage = () => {
       target: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}`,
     },
   ]);
-  const [analyticsTx, setAnalyticsTx] = useState<string>();
+  // const [analyticsTx, setAnalyticsTx] = useState<string>();
 
   useEffect(() => {
     const indexService = new IndexService("testnet");
@@ -65,24 +60,6 @@ const Home: NextPage = () => {
     }
   };
 
-  const handleShareAnalytics = async () => {
-    setALoading(true);
-    try {
-      const result = await fetch("/api", {
-        method: "POST",
-        body: JSON.stringify({
-          connectedAddress: connectedAddress,
-        }),
-      });
-      const tx = await result.json();
-      setALoading(false);
-      setAnalyticsTx(tx.data);
-    } catch (e) {
-      setALoading(false);
-      console.log(e);
-    }
-  };
-
   const handleGetRecommendations = async (type: number) => {
     try {
       const result = await fetch("/api", {
@@ -90,8 +67,8 @@ const Home: NextPage = () => {
       });
       const recommendations = await result.json();
       const recommended_followers = recommendations.data[type];
-      let follower_nodes = [{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }];
-      let follower_links = [];
+      const follower_nodes = [{ id: `${connectedAddress?.slice(0, 5)}...${connectedAddress?.slice(38, 42)}` }];
+      const follower_links: SetStateAction<{ source: string; target: string }[]> = [];
       recommended_followers.map((i: string) => {
         follower_nodes.push({ id: `${i?.slice(0, 5)}...${i?.slice(38, 42)}` });
       });
